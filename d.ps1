@@ -1,4 +1,4 @@
-$lasy = 0; 
+$lasy = 1; 
 
 if ($lasy -ne 1) { ExiT }
 
